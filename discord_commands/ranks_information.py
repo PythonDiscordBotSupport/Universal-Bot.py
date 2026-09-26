@@ -139,4 +139,3 @@ class RanksInformationCog(commands.Cog):
 
 async def setup(bot: commands.Bot):
   await bot.add_cog(RanksInformationCog(bot))
-[opc@discord-bot Discord-Bot.py]$
