@@ -1,3 +1,5 @@
+
+
 import json
 import os
 from datetime import datetime, timezone
@@ -45,7 +47,7 @@ class RanksInformationCog(commands.Cog):
       guild = interaction.guild
       owner = guild.owner
 
-      # 1. Basic Information
+      # 1. Basic Information (Первым)
       basic_embed = discord.Embed(
           title="📌 Basic Information",
           color=discord.Color.blue(),
@@ -68,7 +70,7 @@ class RanksInformationCog(commands.Cog):
       )
       embeds.append(basic_embed)
 
-      # 2. Complete Roles Hierarchy
+      # 2. Complete Roles (Вторым)
       complete_roles = data.get("complete_roles", {})
       if complete_roles:
         sorted_roles = sorted(
@@ -104,7 +106,7 @@ class RanksInformationCog(commands.Cog):
 
         embeds.append(comp_embed)
 
-      # 3. Operational Roles
+      # 3. Operational Roles (Третьим)
       op_roles = data.get("operational_roles", [])
       op_text = "\n".join([f"• {role}" for role in op_roles]) if op_roles else "*None*"
 
@@ -115,7 +117,7 @@ class RanksInformationCog(commands.Cog):
       )
       embeds.append(op_embed)
 
-      # 4. Immune Roles
+      # 4. Immune Roles (Четвертым)
       im_roles = data.get("immutable_roles", [])
       im_text = "\n".join([f"• {role}" for role in im_roles]) if im_roles else "*None*"
 
@@ -139,4 +141,4 @@ class RanksInformationCog(commands.Cog):
 
 async def setup(bot: commands.Bot):
   await bot.add_cog(RanksInformationCog(bot))
-      
+[opc@discord-bot Discord-Bot.py]$
