@@ -1,3 +1,4 @@
+cat << 'EOF' > discord_commands/ranks_information.py
 import json
 import os
 from datetime import datetime, timezone
@@ -45,6 +46,10 @@ class RanksInformationCog(commands.Cog):
       guild = interaction.guild
       owner = guild.owner
 
+      # Получаем канал для логов из конфига
+      prog_channel_id = data.get("progression_channel_id")
+      prog_channel = guild.get_channel(prog_channel_id) if prog_channel_id else None
+
       # 1. Basic Information (Первым)
       basic_embed = discord.Embed(
           title="📌 Basic Information",
@@ -64,6 +69,11 @@ class RanksInformationCog(commands.Cog):
       basic_embed.add_field(
           name="Roblox Group ID",
           value=f"`{data.get('group_id')}`",
+          inline=False,
+      )
+      basic_embed.add_field(
+          name="Progression Logs Channel",
+          value=f"{prog_channel.mention if prog_channel else 'Not set'} (`{prog_channel_id}`)",
           inline=False,
       )
       embeds.append(basic_embed)
@@ -139,3 +149,4 @@ class RanksInformationCog(commands.Cog):
 
 async def setup(bot: commands.Bot):
   await bot.add_cog(RanksInformationCog(bot))
+EOF
